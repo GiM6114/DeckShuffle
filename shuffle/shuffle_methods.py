@@ -31,6 +31,12 @@ def overhand(deck, n_repetitions=1):
                 break
     return Deck(deck=deck_arr)
 
+def overhand_time(deck, n_repetitions=1):
+    """
+        3 seconds for a 40 cards deck, and linear scaling
+    """
+    return n_repetitions * (3 * len(deck)/40)
+
 def piles(deck, n_piles, pick_randomly=False, n_repetitions=1):
     """
         Deterministic shuffle where cards are put on piles one by one. Then the piles are put on top of one another.
@@ -47,6 +53,12 @@ def piles(deck, n_piles, pick_randomly=False, n_repetitions=1):
         
         deck_arr = shuffled_deck_arr
     return Deck(deck=shuffled_deck_arr)
+
+def piles_time(deck, n_piles, pick_randomly=False, n_repetitions=1):
+    """
+        Supposes 4 cards are placed in 1 second, 2 piles gathered in 1 second (at the end)
+    """
+    return n_repetitions * (len(deck) / 4 + n_piles / 2)
 
 def random_permutation(deck):
     return np.random.permutation(deck)

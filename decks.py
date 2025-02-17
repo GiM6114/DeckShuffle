@@ -34,6 +34,9 @@ class Deck:
         self.deck = np.zeros(n_cards)
         for i in range(n_cards):
             self.deck[i] = np.random.choice(self.n_types, size=1, p=self.n_cards_per_type/n_cards)
+            
+    def __len__(self):
+        return len(self.deck)
     
 def get_Commander_deck():
     return Deck(n_cards_per_type=[36,64]) # 36 Lands, 64 non-Lands
