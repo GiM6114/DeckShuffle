@@ -30,7 +30,8 @@ def _mean_entropy(proba_matrix):
 def mean_deck_next_card_entropy(deck):
     return _mean_entropy(next_type_probability(deck))
 
-def distance_to_random(deck, n_shuffles, shuffle_fn, milestones_granularity=0.1, time_shuffle_fn=None, **shuffle_fn_kwargs):
+def distance_to_random(deck, n_shuffles, shuffle_fn, milestones_granularity=0.1, time_shuffle_fn=None, seed=0, **shuffle_fn_kwargs):
+    np.random.seed(seed)
     dist_to_random = np.zeros(n_shuffles + 1)
     next_type_prob = next_type_probability(deck)
     dist_to_random[0] = np.linalg.norm(next_type_prob - deck.get_proba_matrix())
@@ -44,12 +45,12 @@ def distance_to_random(deck, n_shuffles, shuffle_fn, milestones_granularity=0.1,
     time = np.cumsum(time)
     
     if time_shuffle_fn is not None:
-        milestones = np.flip(np.arange(0.1,1,milestones_granularity))
+        milestones = np.flip(np.arange(milestones_granularity,1,milestones_granularity))
         time_until = np.zeros(len(milestones))
         for i in range(len(milestones)):
             idx = np.argmax(dist_to_random < milestones[i])
             time_until[i] = time[idx]
-        return dist_to_random, milestones, time_until
+        return dist_to_random, time, milestones, time_until
     return dist_to_random
         
     

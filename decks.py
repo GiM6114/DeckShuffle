@@ -28,12 +28,10 @@ class Deck:
     def get_proba_matrix(self):
         return repeat(self.n_cards_per_type/len(self.deck), 'k -> n k', n=self.n_types)
     
-    # TODO: slightly scrambled good order
-    def small_scramble(self, bias):
-        n_cards = len(self.deck)
-        self.deck = np.zeros(n_cards)
-        for i in range(n_cards):
-            self.deck[i] = np.random.choice(self.n_types, size=1, p=self.n_cards_per_type/n_cards)
+    # TODO: slightly scrambled good order for more realistic starting position
+    def small_scramble(self, n_cards_to_shuffle):
+        cards = np.random.randint(0, len(self), size=n_cards_to_shuffle)
+        for i in 
             
     def __len__(self):
         return len(self.deck)
