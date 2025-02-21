@@ -29,9 +29,9 @@ class Deck:
         return repeat(self.n_cards_per_type/len(self.deck), 'k -> n k', n=self.n_types)
     
     # TODO: slightly scrambled good order for more realistic starting position
-    def small_scramble(self, n_cards_to_shuffle):
-        cards = np.random.randint(0, len(self), size=n_cards_to_shuffle)
-        for i in 
+    # def small_scramble(self, n_cards_to_shuffle):
+    #     cards = np.random.randint(0, len(self), size=n_cards_to_shuffle)
+    #     for i in 
             
     def __len__(self):
         return len(self.deck)
